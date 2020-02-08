@@ -4,7 +4,7 @@ module.exports = class KendaniEak {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
-        this.energy = 8;
+        this.energy = 11;
         this.index = index;
         this.gender = random(1, 2);
 

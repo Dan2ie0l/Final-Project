@@ -1,7 +1,7 @@
 var KendaniEak = require("./kendanieak");
 var random = require("./random.js");
 
-module.exports =class Mah extends KendaniEak {
+module.exports = class Mah extends KendaniEak {
   constructor(x, y, index) {
     super(x, y, index)
     this.tariq = 0
@@ -40,7 +40,7 @@ module.exports =class Mah extends KendaniEak {
     var datarkvandakner = this.yntrelVandak(1);
     var norvandak = random(datarkvandakner);
 
-    if (norvandak) {
+    if (norvandak ) {
 
       matrix[this.y][this.x] = 0;
       matrix[norvandak[1]][norvandak[0]] = 5;
@@ -62,7 +62,7 @@ module.exports =class Mah extends KendaniEak {
   bazmanal() {
     this.energy = 10;
     var norVandak = random(this.yntrelVandak(0));
-    if (norVandak) {
+    if (norVandak ) {
       var mah = new Mah(norVandak[0], norVandak[1]);
       mahh.push(mah);
       matrix[norVandak[1]][norVandak[0]] = 5;
@@ -72,6 +72,7 @@ module.exports =class Mah extends KendaniEak {
     matrix[this.y][this.x] = 0;
     if (this.energy = 0.01) {
       mahh.splice(i, 1);
+      break;
     }
   }
 

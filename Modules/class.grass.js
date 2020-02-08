@@ -1,7 +1,7 @@
 var KendaniEak = require("./kendanieak");
 var random = require("./random.js");
 
-module.exports =class Grass extends KendaniEak {
+module.exports = class Grass extends KendaniEak {
 
     bazmanal() {
         this.multiply++;
@@ -14,7 +14,7 @@ module.exports =class Grass extends KendaniEak {
             matrix[this.direction[1]][this.direction[0]] = this.index;
             this.multiply = 0;
         }
-        
+
     }
 
 }

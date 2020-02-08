@@ -1,7 +1,7 @@
 var KendaniEak = require("./kendanieak");
 var random = require("./random.js");
 
-module.exports =class Xotaker extends KendaniEak {
+module.exports = class Xotaker extends KendaniEak {
   constructor(x, y, index) {
     super(x, y, index)
     this.tariq = 0
@@ -59,7 +59,7 @@ module.exports =class Xotaker extends KendaniEak {
   }
 
   bazmanal() {
-    this.energy = 4;
+    this.energy = 15;
     var norVandak = random(this.yntrelVandak(0));
     if (norVandak) {
       var norXotaker = new Xotaker(norVandak[0], norVandak[1]);
@@ -70,7 +70,8 @@ module.exports =class Xotaker extends KendaniEak {
   mahanal(i) {
     matrix[this.y][this.x] = 0;
     if (this.energy = 1) {
-      xotakerner.splice(i, 0.1);
+      xotakerner.splice(i, 1);
+      break;
     }
   }
 

@@ -4,7 +4,7 @@ function setup() {
     var socket = io();
     var side = 30;
     var matrix = [];
-    var grass;
+
 
 
     //! Getting DOM objects (HTML elements)
@@ -13,32 +13,35 @@ function setup() {
     let vorsordCountElement = document.getElementById('vorsordCountElement');
     let gishatichCountElement = document.getElementById('gishatichCountElement');
     let mahCountElement = document.getElementById('mahCountElement');
-    let grassqanak =  document.getElementById('grassqanak');
-    let xotakerqanak= document.getElementById('xotakerqanak');
-    let gishatichnerqanak= document.getElementById('gishatichnerqanak');
-    let vorsordqanak= document.getElementById('vorsordqanak');
-    let mahqanak= document.getElementById('mahqanak');
-
+    let dragonCountElement = document.getElementById('dragonCountElement');
+    let grassqanak = document.getElementById('grassqanak');
+    let xotakerqanak = document.getElementById('xotakerqanak');
+    let gishatichnerqanak = document.getElementById('gishatichnerqanak');
+    let vorsordqanak = document.getElementById('vorsordqanak');
+    let mahqanak = document.getElementById('mahqanak');
+    let dragonqanak = document.getElementById('dragonqanak');
 
     var seasonText = document.getElementById("season")
 
     socket.on("data", drawCreatures);
 
     function drawCreatures(data) {
-        console.log(data.grassArr.length);
+
         season = data.season;
         matrix = data.matrix;
         grassqanak.innerText = data.grassArr.length;
-        xotakerqanak.innerText  = data.xotakerner.length;
+        xotakerqanak.innerText = data.xotakerner.length;
         gishatichnerqanak.innerText = data.gishatichner.length;
-        vorsordqanak.innerHTML  = data.vorsord.length;
+        vorsordqanak.innerHTML = data.vorsord.length;
         mahqanak.innerText = data.mah.length;
+        dragonqanak = data.dragons.length;
 
         grassCountElement.innerText = data.grassCounter;
         grassEaterCountElement.innerText = data.grassEaterCounter;
         gishatichCountElement.innerText = data.gishatichCounter;
         vorsordCountElement.innerText = data.vorsordCounter;
         mahCountElement.innerText = data.mahCounter;
+        dragonCountElement.innerText = data.dragonCounter;
 
         createCanvas(matrix[0].length * side, matrix.length * side)
 
@@ -63,168 +66,86 @@ function setup() {
         }
 
 
+        for (var y = 0; y < matrix.length; y++) {
+            for (var x = 0; x < matrix[y].length; x++) {
 
-
-
-        if (season == "winter") {
-
-            for (var y = 0; y < matrix.length; y++) {
-
-                for (var x = 0; x < matrix[y].length; x++) {
-                    if (matrix[y][x] == 1) {
-                        fill("white");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 0) {
-                        fill("#acacac");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 2) {
-                        fill("#ccff66");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 3) {
-                        fill("#33cccc");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 4) {
-                        fill("#999966");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 5) {
-                        fill("black");
-                        rect(x * side, y * side, side, side);
-                    }
+                if (matrix[y][x] == 0) {
+                    fill("#acacac");
                 }
-            }
-
-        }
-        else if (season == "spring") {
-
-            for (var y = 0; y < matrix.length; y++) {
-
-                for (var x = 0; x < matrix[y].length; x++) {
-                    if (matrix[y][x] == 1) {
+                else if (matrix[y][x] == 1) {
+                    if (season == "spring")
+                        fill("bfff00");
+                    else if (season == "summer")
                         fill("green");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 0) {
-                        fill("#acacac");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 2) {
-                        fill("yellow");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 3) {
-                        fill("red");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 4) {
-                        fill("brown");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 5) {
-                        fill("black");
-                        rect(x * side, y * side, side, side);
-                    }
+                    else if (season == "autumn")
+                        fill("#008000");
+                    else if (season == "winter")
+                        fill("b3ffb3");
                 }
+                else if (matrix[y][x] == 2) {
+                    if (season == "spring")
+                        fill("yellow");
+                    else if (season == "summer")
+                        fill("yellow");
+                    else if (season == "autumn")
+                        fill("#cccc00");
+                    else if (season == "winter")
+                        fill("#ffff99");
+                }
+                else if (matrix[y][x] == 3) {
+                    if (season == "spring")
+                        fill("ff5c33");
+                    else if (season == "summer")
+                        fill("red");
+                    else if (season == "autumn")
+                        fill("#991f00");
+                    else if (season == "winter")
+                        fill("#ffad99");
+                }
+                else if (matrix[y][x] == 4) {
+                    if (season == "spring")
+                        fill("brown");
+                    else if (season == "summer")
+                        fill("brown");
+                    else if (season == "autumn")
+                        fill("#ff5500");
+                    else if (season == "winter")
+                        fill("#ffad99");
+                }
+                else if (matrix[y][x] == 5) {
+                    fill("black");
+                }
+                else if (matrix[y][x] == 6) {
+                    if (season == "spring")
+                        fill("#008080");
+                    else if (season == "summer")
+                        fill("aqua");
+                    else if (season == "autumn")
+                        fill("aqua");
+                    else if (season == "winter")
+                        fill("#ccffff");
+                }
+                else if (matrix[y][x] == 7) {
+                    fill("#b300b3");
+                }
+                else if (matrix[y][x] == 8) {
+                    fill("#999900");
+                }
+
+                rect(x * side, y * side, side, side);
             }
         }
-        else if (season == "summer") {
 
-            for (var y = 0; y < matrix.length; y++) {
 
-                for (var x = 0; x < matrix[y].length; x++) {
-                    if (matrix[y][x] == 1) {
-                        fill("green");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 0) {
-                        fill("#acacac");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 2) {
-                        fill("yellow");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 3) {
-                        fill("red");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 4) {
-                        fill("brown");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 5) {
-                        fill("black");
-                        rect(x * side, y * side, side, side);
-                    }
-                }
-            }
-        }
-        else if (season == "autumn") {
 
-            for (var y = 0; y < matrix.length; y++) {
 
-                for (var x = 0; x < matrix[y].length; x++) {
-                    if (matrix[y][x] == 1) {
-                        fill("#ff9900");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 0) {
-                        fill("#acacac");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 2) {
-                        fill("yellow");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 3) {
-                        fill("red");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 4) {
-                        fill("brown");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 5) {
-                        fill("black");
-                        rect(x * side, y * side, side, side);
-                    }
-                }
-            }
-        }
-        else {
-            for (var y = 0; y < matrix.length; y++) {
 
-                for (var x = 0; x < matrix[y].length; x++) {
-                    if (matrix[y][x] == 1) {
-                        fill("green");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 0) {
-                        fill("#acacac");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 2) {
-                        fill("yellow");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 3) {
-                        fill("red");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 4) {
-                        fill("brown");
-                        rect(x * side, y * side, side, side);
-                    }
-                    else if (matrix[y][x] == 5) {
-                        fill("black");
-                        rect(x * side, y * side, side, side);
-                    }
-                }
-            }
-        }
     }
+}
+function Lighting() {
+    socket.emit("light");
+}
+
+function Boom() {
+    socket.emit("boom");
 }
