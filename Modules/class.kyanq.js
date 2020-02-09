@@ -59,7 +59,7 @@ module.exports = class Life extends KendaniEak {
   }
 
   bazmanal() {
-    this.energy = 20;
+    this.energy = 10;
     var norVandak = random(this.yntrelVandak(0));
     if (norVandak ) {
       var live = new Life(norVandak[0], norVandak[1]);
@@ -69,10 +69,10 @@ module.exports = class Life extends KendaniEak {
   }
   mahanal(i) {
     matrix[this.y][this.x] = 0;
-    if (this.energy = 6) {
+   
       kyanq.splice(i, 1);
-      break;
-    }
+    
+    
 
 
   }

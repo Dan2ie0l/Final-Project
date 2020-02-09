@@ -40,13 +40,13 @@ module.exports = class Mah extends KendaniEak {
     var datarkvandakner = this.yntrelVandak(1);
     var norvandak = random(datarkvandakner);
 
-    if (norvandak ) {
+    if (norvandak) {
 
       matrix[this.y][this.x] = 0;
       matrix[norvandak[1]][norvandak[0]] = 5;
       this.x = norvandak[0];
       this.y = norvandak[1];
-      this.energy++;
+      this.energy+=9;
       for (var c in grassArr) {
         if (grassArr[c].x == this.x && grassArr[c].y == this.y) {
           grassArr.splice(c, 1);
@@ -60,9 +60,9 @@ module.exports = class Mah extends KendaniEak {
   }
 
   bazmanal() {
-    this.energy = 10;
+    this.energy = 11;
     var norVandak = random(this.yntrelVandak(0));
-    if (norVandak ) {
+    if (norVandak) {
       var mah = new Mah(norVandak[0], norVandak[1]);
       mahh.push(mah);
       matrix[norVandak[1]][norVandak[0]] = 5;
@@ -70,10 +70,10 @@ module.exports = class Mah extends KendaniEak {
   }
   mahanal(i) {
     matrix[this.y][this.x] = 0;
-    if (this.energy = 2) {
+    
       mahh.splice(i, 1);
-      break;
-    }
+
+    
   }
 
 }

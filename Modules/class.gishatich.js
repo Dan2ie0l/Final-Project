@@ -43,7 +43,7 @@ module.exports = class Gishatich extends KendaniEak {
       matrix[norvandak[1]][norvandak[0]] = 3;
       this.x = norvandak[0];
       this.y = norvandak[1];
-      this.energy++;
+      this.energy+=6;
       for (var c in xotakerner) {
 
         if (xotakerner[c].x == this.x && xotakerner[c].y == this.y) {
@@ -59,7 +59,7 @@ module.exports = class Gishatich extends KendaniEak {
   }
 
   bazmanal() {
-    this.energy = 20;
+    this.energy = 15;
     var norVandak = random(this.yntrelVandak(0));
     if (norVandak) {
       var gishatich = new Gishatich(norVandak[0], norVandak[1]);

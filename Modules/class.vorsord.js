@@ -58,20 +58,20 @@ module.exports = class Vorsord extends KendaniEak {
     }
   }
   bazmanal() {
-    this.energy = 10;
+    this.energy = 30;
     var norVandak = random(this.yntrelVandak(0));
-    if (norVandak ) {
+    if (norVandak) {
       var vorso = new Vorsord(norVandak[0], norVandak[1]);
-      vorsord.push(vorsord);
+      vorsord.push(vorso);
       matrix[norVandak[1]][norVandak[0]] = 4;
     }
   }
   mahanal(i) {
     matrix[this.y][this.x] = 0;
-    if (this.energy = 5) {
+    
       vorsord.splice(i, 1)
-      break;
-    }
+
+    
 
 
   }

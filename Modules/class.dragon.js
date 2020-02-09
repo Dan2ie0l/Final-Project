@@ -69,10 +69,10 @@ module.exports = class Dragon extends KendaniEak {
   }
   mahanal(i) {
     matrix[this.y][this.x] = 0;
-    if (this.energy = 6) {
+    
       dragons.splice(i, 1);
-      break;
-    }
+      
+    
 
 
   }

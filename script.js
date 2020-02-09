@@ -2,7 +2,7 @@
 function setup() {
 
     var socket = io();
-    var side = 30;
+    var side = 20;
     var matrix = [];
 
 
@@ -46,7 +46,7 @@ function setup() {
         dragonCountElement.innerText = data.dragonCounter;
         lifeCountElement.innerText = data.liveCounter;
 
-        createCanvas(matrix[0].length * side, matrix.length * side)
+        createCanvas(matrix[0].length * side + 1, matrix.length * side)
 
         background('#acacac');
 
@@ -77,13 +77,13 @@ function setup() {
                 }
                 else if (matrix[y][x] == 1) {
                     if (season == "spring")
-                        fill("bfff00");
+                        fill("#bfff00");
                     else if (season == "summer")
                         fill("green");
                     else if (season == "autumn")
                         fill("#008000");
                     else if (season == "winter")
-                        fill("b3ffb3");
+                        fill("#b3ffb3");
                 }
                 else if (matrix[y][x] == 2) {
                     if (season == "spring")
@@ -97,7 +97,7 @@ function setup() {
                 }
                 else if (matrix[y][x] == 3) {
                     if (season == "spring")
-                        fill("ff5c33");
+                        fill("#ff5c33");
                     else if (season == "summer")
                         fill("red");
                     else if (season == "autumn")
@@ -131,12 +131,7 @@ function setup() {
                 else if (matrix[y][x] == 7) {
                     fill("white");
                 }
-                else if (matrix[y][x] == 8) {
-                    fill("#b300b3");
-                }
-                else if (matrix[y][x] == 9) {
-                    fill("#999900");
-                }
+                
 
                 rect(x * side, y * side, side, side);
             }
@@ -147,11 +142,4 @@ function setup() {
 
 
     }
-}
-function Lighting() {
-    socket.emit("light");
-}
-
-function Boom() {
-    socket.emit("boom");
 }

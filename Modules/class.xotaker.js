@@ -69,10 +69,10 @@ module.exports = class Xotaker extends KendaniEak {
   }
   mahanal(i) {
     matrix[this.y][this.x] = 0;
-    if (this.energy < 5) {
+    
       xotakerner.splice(i, 1);
-      break;
-    }
+     
+    
   }
 
 }

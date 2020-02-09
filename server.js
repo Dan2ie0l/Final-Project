@@ -33,7 +33,7 @@ var season = '';
 
 
 //matrix generating
-function matrixGenerator(matrixSize, grass, xotakerner, gishatichner, vorsord, mahh, dragons,kyanq) {
+function matrixGenerator(matrixSize, grass, xotakerner, gishatichner, vorsord, mahh, dragons, kyanq) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -74,11 +74,11 @@ function matrixGenerator(matrixSize, grass, xotakerner, gishatichner, vorsord, m
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 7;
-        
+
     }
-    
+
 }
-matrixGenerator(20, 10, 2, 2, 3, 3, 4,3);
+matrixGenerator(70, 20, 2, 2, 3, 3, 2, 3);
 //end
 
 
@@ -90,7 +90,7 @@ app.use(express.static("."));
 app.get('/', function (req, res) {
     res.redirect('index.html');
 });
-server.listen(3001);
+server.listen(3000);
 
 
 //
@@ -100,7 +100,7 @@ function creatingobjects() {
         for (var x = 0; x < matrix[y].length; ++x) {
 
             if (matrix[y][x] == 1) {
-                grassArr.push(new Grass(x, y, 1));
+                grassArr.push(new Grass(x, y, 1))
                 grassHashiv++;
 
             }
@@ -128,18 +128,18 @@ function creatingobjects() {
 
             }
 
-        
-        else if (matrix[y][x] == 7) {
-            kyanq.push(new Life(x, y, 7));
-            kyanqhashiv++;
 
-            
+            else if (matrix[y][x] == 7) {
+                kyanq.push(new Life(x, y, 7));
+                kyanqhashiv++;
+
+
+            }
+
+
         }
-        
-
     }
-    }
-    }
+}
 
 
 
@@ -147,111 +147,6 @@ function creatingobjects() {
 
 creatingobjects();
 
-io.on("connection", function (socket) {
-    socket.on("light", function () {
-        let rx = Math.floor(random(30));
-        let ry = Math.floor(random(30));
-        for (var y = 0; y < 30; y++) {
-            for (var x = 0; x < 30; x++) {
-                if ((y + x) == (ry + rx) || (y - x) == (ry - rx) || (x == rx && (y == ry - 5 || y == ry + 5)) || (y == ry && (x == rx - 5 || x == rx + 5))) {
-                    if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                        if (matrix[y][x] == 1) {
-                            for (var i in grassArr) {
-                                if (x == grassArr[i].x && y == grassArr[i].y) {
-                                    grassArr.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        else if (matrix[y][x] == 2) {
-                            for (var i in xotakerner) {
-                                if (x == xotakerner[i].x && y == xotakerner[i].y) {
-                                    xotakerner.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        else if (matrix[y][x] == 3) {
-                            for (var i in gishatichner) {
-                                if (x == gishatichner[i].x && y == gishatichner[i].y) {
-                                    gishatichner.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        else if (matrix[y][x] == 4) {
-                            for (var i in vorsord) {
-                                if (x == vorsord[i].x && y == vorsord[i].y) {
-                                    vorsord.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        matrix[y][x] = 8;
-                    }
-                }
-            }
-        }
-    })
-    socket.on("boom", function () {
-        let rx = Math.floor(random(30));
-        let ry = Math.floor(random(30));
-        for (var y = 0; y < 30; y++) {
-            for (var x = 0; x < 30; x++) {
-                if (((y == ry || y == ry - 1 || y == ry + 1) && (x == rx - 1 || x == rx - 2 || x == rx - 3 || x == rx + 1 || x == rx + 2 || x == rx + 3)) || ((x == rx || x == rx - 1 || x == rx + 1) && (y == ry - 1 || y == ry - 2 || y == ry - 3 || y == ry + 1 || y == ry + 2 || y == ry + 3)) || ((y == ry - 2 || y == ry + 2) && (x == rx - 2 || x == rx + 2)) || ((y == ry - 3 || y == ry + 3) && (x == rx - 3 || x == rx + 3)) || ((y == ry - 4 || y == ry + 4) && (x == rx - 4 || x == rx + 4))) {
-                    if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                        if (matrix[y][x] == 1) {
-                            for (var i in grassArr) {
-                                if (x == grassArr[i].x && y == grassArr[i].y) {
-                                    grassArr.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        else if (matrix[y][x] == 2) {
-                            for (var i in xotakerner) {
-                                if (x == xotakerner[i].x && y == xotakerner[i].y) {
-                                    xotakerner.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        else if (matrix[y][x] == 3) {
-                            for (var i in gishatichner) {
-                                if (x == gishatichner[i].x && y == gishatichner[i].y) {
-                                    gishatichner.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        else if (matrix[y][x] == 4) {
-                            for (var i in vorsord) {
-                                if (x == vorsord[i].x && y == vorsord[i].y) {
-                                    vorsord.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                        else if (matrix[y][x] == 6) {
-                            for (var i in dragons) {
-                                if (x == dragons[i].x && y == dragons[i].y) {
-                                    dragons.splice(i, 1);
-                                    break;
-                                }
-                            }
-                        }
-                       
-                        matrix[y][x] = 9;
-                    }
-                }
-            }
-        }
-    })
-
-
-
-});
 var z;
 function game() {
 
@@ -276,16 +171,16 @@ function game() {
 
 
     for (var i in grassArr) {
-        if (season ==! "winter" || season ==! "autumn" ) {
-            grassArr[i].bazmanal(); 
+        if (season !== "winter" || season !== "autumn") {
+            grassArr[i].bazmanal();
         }
-        
-                  
+    
+
     }
     for (var i in vorsord) {
         vorsord[i].eat();
 
-        if (vorsord[i].energy >= 10 && season ==! "winter") {
+        if (vorsord[i].energy >= 10 && season !== "winter") {
             vorsord[i].bazmanal();
         }
         else if (vorsord[i].energy <= 0) {
@@ -296,7 +191,7 @@ function game() {
     for (var i in gishatichner) {
         gishatichner[i].eat();
 
-        if (gishatichner[i].energy >= 12 && season ==! "winter") {
+        if (gishatichner[i].energy >= 12 && season !== "winter") {
             gishatichner[i].bazmanal()
         }
         else if (gishatichner[i].energy <= 0) {
@@ -307,7 +202,7 @@ function game() {
         xotakerner[i].eat();
 
 
-        if (xotakerner[i].energy >= 10 && season ==! "winter" || season ==! "autumn") {
+        if (xotakerner[i].energy >= 10 && season !== "winter" || season !== "autumn") {
             xotakerner[i].bazmanal();
         }
         else if (xotakerner[i].energy <= 0) {
@@ -315,7 +210,6 @@ function game() {
             xotakerner[i].mahanal(i);
         }
     }
-
     for (var i in mahh) {
         mahh[i].eat();
 
@@ -330,18 +224,17 @@ function game() {
     for (var i in dragons) {
         dragons[i].eat();
 
-        if (dragons[i].energy >= 10 && season ==! "winter") {
+        if (dragons[i].energy >= 10 && season !== "winter") {
             dragons[i].bazmanal()
         }
         else if (dragons[i].energy <= 0) {
             dragons[i].mahanal(i)
         }
-
     }
     for (var i in kyanq) {
         kyanq[i].eat();
 
-        if (kyanq[i].energy >= 11 && season ==! "winter" || season ==! "autumn") {
+        if (kyanq[i].energy >= 20 && season !== "winter" || season !== "autumn") {
             kyanq[i].bazmanal()
         }
         else if (kyanq[i].energy <= 0) {
@@ -371,7 +264,7 @@ function game() {
         vorsord: vorsord,
         dragons: dragons,
         mah: mahh,
-        kyanq:kyanq
+        kyanq: kyanq
     }
 
     //! Send data over the socket to clients who listens "data"
@@ -380,4 +273,4 @@ function game() {
 
 }
 
-setInterval(game, 3000)
+setInterval(game, 1000);
