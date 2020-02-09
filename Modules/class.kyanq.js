@@ -1,10 +1,10 @@
 var KendaniEak = require("./kendanieak");
 var random = require("./random.js");
 
-module.exports = class Dragon extends KendaniEak {
+module.exports = class Life extends KendaniEak {
   constructor(x, y, index) {
     super(x, y, index)
-    
+   
   }
   stanalNorKordinatner() {
     this.directions = [
@@ -28,7 +28,7 @@ module.exports = class Dragon extends KendaniEak {
     var norvandak = random(datarkvandakner);
     if (norvandak) {
       matrix[this.y][this.x] = 0;
-      matrix[norvandak[1]][norvandak[0]] = 6;
+      matrix[norvandak[1]][norvandak[0]] = 7;
       this.x = norvandak[0];
       this.y = norvandak[1];
       this.energy--;
@@ -36,18 +36,18 @@ module.exports = class Dragon extends KendaniEak {
   }
   eat() {
     this.stanalNorKordinatner();
-    var datarkvandakner = this.yntrelVandak(4);
+    var datarkvandakner = this.yntrelVandak(5);
     var norvandak = random(datarkvandakner);
     if (norvandak) {
       matrix[this.y][this.x] = 0;
-      matrix[norvandak[1]][norvandak[0]] = 6;
+      matrix[norvandak[1]][norvandak[0]] = 7;
       this.x = norvandak[0];
       this.y = norvandak[1];
       this.energy++;
-      for (var c in vorsord) {
+      for (var c in mahh) {
 
-        if (vorsord[c].x == this.x && vorsord[c].y == this.y) {
-          vorsord.splice(c, 1);
+        if (mahh[c].x == this.x && mahh[c].y == this.y) {
+          mahh.splice(c, 1);
 
           break;
         }
@@ -62,15 +62,15 @@ module.exports = class Dragon extends KendaniEak {
     this.energy = 20;
     var norVandak = random(this.yntrelVandak(0));
     if (norVandak ) {
-      var dragon = new Dragon(norVandak[0], norVandak[1]);
-      dragons.push(dragon);
-      matrix[norVandak[1]][norVandak[0]] = 6;
+      var live = new Life(norVandak[0], norVandak[1]);
+      kyanq.push(live);
+      matrix[norVandak[1]][norVandak[0]] = 7;
     }
   }
   mahanal(i) {
     matrix[this.y][this.x] = 0;
     if (this.energy = 6) {
-      dragons.splice(i, 1);
+      kyanq.splice(i, 1);
       break;
     }
 
@@ -78,6 +78,4 @@ module.exports = class Dragon extends KendaniEak {
   }
 
 }
-
-
 

@@ -20,6 +20,7 @@ function setup() {
     let vorsordqanak = document.getElementById('vorsordqanak');
     let mahqanak = document.getElementById('mahqanak');
     let dragonqanak = document.getElementById('dragonqanak');
+    let lifeqanak = document.getElementById('lifeqanak');
 
     var seasonText = document.getElementById("season")
 
@@ -34,7 +35,8 @@ function setup() {
         gishatichnerqanak.innerText = data.gishatichner.length;
         vorsordqanak.innerHTML = data.vorsord.length;
         mahqanak.innerText = data.mah.length;
-        dragonqanak = data.dragons.length;
+        dragonqanak.innerText = data.dragons.length;
+        lifeqanak.innerText = data.kyanq.length;
 
         grassCountElement.innerText = data.grassCounter;
         grassEaterCountElement.innerText = data.grassEaterCounter;
@@ -42,6 +44,7 @@ function setup() {
         vorsordCountElement.innerText = data.vorsordCounter;
         mahCountElement.innerText = data.mahCounter;
         dragonCountElement.innerText = data.dragonCounter;
+        lifeCountElement.innerText = data.liveCounter;
 
         createCanvas(matrix[0].length * side, matrix.length * side)
 
@@ -126,9 +129,12 @@ function setup() {
                         fill("#ccffff");
                 }
                 else if (matrix[y][x] == 7) {
-                    fill("#b300b3");
+                    fill("white");
                 }
                 else if (matrix[y][x] == 8) {
+                    fill("#b300b3");
+                }
+                else if (matrix[y][x] == 9) {
                     fill("#999900");
                 }
 

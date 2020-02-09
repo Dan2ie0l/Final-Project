@@ -70,7 +70,7 @@ module.exports = class Mah extends KendaniEak {
   }
   mahanal(i) {
     matrix[this.y][this.x] = 0;
-    if (this.energy = 0.01) {
+    if (this.energy = 2) {
       mahh.splice(i, 1);
       break;
     }

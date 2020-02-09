@@ -6,7 +6,7 @@ module.exports = class KendaniEak {
         this.y = y;
         this.energy = 11;
         this.index = index;
-        this.gender = random(1, 2);
+        
 
         this.directions = [
             [this.x - 1, this.y - 1],

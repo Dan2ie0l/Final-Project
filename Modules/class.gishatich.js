@@ -71,8 +71,9 @@ module.exports = class Gishatich extends KendaniEak {
     matrix[this.y][this.x] = 0;
     if (this.energy = 6) {
       gishatichner.splice(i, 1);
+      
     }
-    break;
+    
 
   }
 

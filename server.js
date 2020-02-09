@@ -4,6 +4,7 @@ var Gishatich = require("./Modules/class.gishatich.js");
 var Vorsord = require("./Modules/class.vorsord.js");
 var Mah = require("./Modules/class.mah.js");
 var Dragon = require("./Modules/class.dragon.js");
+var Life = require("./Modules/class.kyanq.js")
 let random = require('./Modules/random.js');
 
 // arrays
@@ -13,12 +14,14 @@ xotakerner = [];
 dragons = [];
 vorsord = [];
 mahh = [];
+kyanq = [];
 grassHashiv = 0;
 xotakerhashiv = 0;
 gishatichhashiv = 0;
 vorsordhashiv = 0;
 mahhashiv = 0;
 dragonshashiv = 0;
+kyanqhashiv = 0;
 
 
 matrix = [];
@@ -30,7 +33,7 @@ var season = '';
 
 
 //matrix generating
-function matrixGenerator(matrixSize, grass, xotakerner, gishatichner, vorsord, mahh, dragons) {
+function matrixGenerator(matrixSize, grass, xotakerner, gishatichner, vorsord, mahh, dragons,kyanq) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -67,8 +70,15 @@ function matrixGenerator(matrixSize, grass, xotakerner, gishatichner, vorsord, m
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 6;
     }
+    for (let i = 0; i < kyanq; i++) {
+        let customX = Math.floor(random(matrixSize));
+        let customY = Math.floor(random(matrixSize));
+        matrix[customY][customX] = 7;
+        
+    }
+    
 }
-matrixGenerator(20, 10, 2, 2, 3, 3, 4);
+matrixGenerator(20, 10, 2, 2, 3, 3, 4,3);
 //end
 
 
@@ -80,7 +90,7 @@ app.use(express.static("."));
 app.get('/', function (req, res) {
     res.redirect('index.html');
 });
-server.listen(3000);
+server.listen(3001);
 
 
 //
@@ -118,11 +128,22 @@ function creatingobjects() {
 
             }
 
+        
+        else if (matrix[y][x] == 7) {
+            kyanq.push(new Life(x, y, 7));
+            kyanqhashiv++;
+
+            
         }
+        
+
+    }
+    }
     }
 
 
-}
+
+
 
 creatingobjects();
 
@@ -167,7 +188,7 @@ io.on("connection", function (socket) {
                             }
                         }
                         
-                        matrix[y][x] = 7;
+                        matrix[y][x] = 8;
                     }
                 }
             }
@@ -221,7 +242,7 @@ io.on("connection", function (socket) {
                             }
                         }
                        
-                        matrix[y][x] = 8;
+                        matrix[y][x] = 9;
                     }
                 }
             }
@@ -255,12 +276,16 @@ function game() {
 
 
     for (var i in grassArr) {
-
+        if (season ==! "winter" || season ==! "autumn" ) {
+            grassArr[i].bazmanal(); 
+        }
+        
+                  
     }
     for (var i in vorsord) {
         vorsord[i].eat();
 
-        if (vorsord[i].energy >= 10) {
+        if (vorsord[i].energy >= 10 && season ==! "winter") {
             vorsord[i].bazmanal();
         }
         else if (vorsord[i].energy <= 0) {
@@ -271,7 +296,7 @@ function game() {
     for (var i in gishatichner) {
         gishatichner[i].eat();
 
-        if (gishatichner[i].energy >= 12) {
+        if (gishatichner[i].energy >= 12 && season ==! "winter") {
             gishatichner[i].bazmanal()
         }
         else if (gishatichner[i].energy <= 0) {
@@ -282,7 +307,7 @@ function game() {
         xotakerner[i].eat();
 
 
-        if (xotakerner[i].energy >= 10) {
+        if (xotakerner[i].energy >= 10 && season ==! "winter" || season ==! "autumn") {
             xotakerner[i].bazmanal();
         }
         else if (xotakerner[i].energy <= 0) {
@@ -305,11 +330,22 @@ function game() {
     for (var i in dragons) {
         dragons[i].eat();
 
-        if (dragons[i].energy >= 10) {
+        if (dragons[i].energy >= 10 && season ==! "winter") {
             dragons[i].bazmanal()
         }
         else if (dragons[i].energy <= 0) {
             dragons[i].mahanal(i)
+        }
+
+    }
+    for (var i in kyanq) {
+        kyanq[i].eat();
+
+        if (kyanq[i].energy >= 11 && season ==! "winter" || season ==! "autumn") {
+            kyanq[i].bazmanal()
+        }
+        else if (kyanq[i].energy <= 0) {
+            kyanq[i].mahanal(i)
         }
 
     }
@@ -328,12 +364,14 @@ function game() {
         vorsordCounter: vorsordhashiv,
         mahCounter: mahhashiv,
         dragonCounter: dragonshashiv,
+        liveCounter: kyanqhashiv,
         grassArr: grassArr,
         gishatichner: gishatichner,
         xotakerner: xotakerner,
         vorsord: vorsord,
         dragons: dragons,
-        mah: mahh
+        mah: mahh,
+        kyanq:kyanq
     }
 
     //! Send data over the socket to clients who listens "data"
@@ -342,4 +380,4 @@ function game() {
 
 }
 
-setInterval(game, 1000)
+setInterval(game, 3000)
