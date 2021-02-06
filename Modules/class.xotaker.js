@@ -59,7 +59,7 @@ module.exports = class Xotaker extends KendaniEak {
   }
 
   bazmanal() {
-    this.energy = 15;
+    this.energy = 10;
     var norVandak = random(this.yntrelVandak(0));
     if (norVandak) {
       var norXotaker = new Xotaker(norVandak[0], norVandak[1]);

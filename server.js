@@ -78,11 +78,13 @@ function matrixGenerator(matrixSize, grass, xotakerner, gishatichner, vorsord, m
     }
 
 }
-matrixGenerator(70, 20, 2, 2, 3, 3, 2, 3);
+matrixGenerator(100, 2, 2, 2, 2, 2, 2, 2);
 //end
 
 
 var express = require('express');
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
+const { setupMaster } = require("cluster");
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -141,37 +143,39 @@ function creatingobjects() {
     }
 }
 
-
-
-
-
 creatingobjects();
 
-var z;
+
+
+
+
+
+let z;
 function game() {
 
 
     z++;
-    if (z >= 0 && z < 10) {
+    if (z >= 0 && z < 20) {
         season = "spring";
     }
-    else if (z >= 10 && z < 20) {
+    else if (z >= 20 && z < 40) {
         season = "autumn"
 
     }
-    else if (z >= 20 && z < 30) {
+    else if (z >= 40 && z < 60) {
         season = "summer"
 
     }
-    else if (z >= 30 && z <= 40) {
+    else if (z >= 60 && z <= 80) {
         season = "winter"
     } else {
         z = 0
+        
     }
 
 
     for (var i in grassArr) {
-        if (season !== "winter" || season !== "autumn") {
+        if (season !== "winter" ) {
             grassArr[i].bazmanal();
         }
     
@@ -191,7 +195,7 @@ function game() {
     for (var i in gishatichner) {
         gishatichner[i].eat();
 
-        if (gishatichner[i].energy >= 12 && season !== "winter") {
+        if (gishatichner[i].energy >= 10 && season !== "winter") {
             gishatichner[i].bazmanal()
         }
         else if (gishatichner[i].energy <= 0) {
@@ -202,7 +206,7 @@ function game() {
         xotakerner[i].eat();
 
 
-        if (xotakerner[i].energy >= 10 && season !== "winter" || season !== "autumn") {
+        if (xotakerner[i].energy >= 10 && season !== "winter" ) {
             xotakerner[i].bazmanal();
         }
         else if (xotakerner[i].energy <= 0) {
@@ -213,7 +217,7 @@ function game() {
     for (var i in mahh) {
         mahh[i].eat();
 
-        if (mahh[i].energy >= 18) {
+        if (mahh[i].energy >= 10) {
             mahh[i].bazmanal()
         }
         else if (mahh[i].energy <= 0) {
@@ -224,7 +228,7 @@ function game() {
     for (var i in dragons) {
         dragons[i].eat();
 
-        if (dragons[i].energy >= 10 && season !== "winter") {
+        if (dragons[i].energy >= 8 && season !== "winter") {
             dragons[i].bazmanal()
         }
         else if (dragons[i].energy <= 0) {
@@ -234,7 +238,7 @@ function game() {
     for (var i in kyanq) {
         kyanq[i].eat();
 
-        if (kyanq[i].energy >= 20 && season !== "winter" || season !== "autumn") {
+        if (kyanq[i].energy >= 10 && season !== "winter" ) {
             kyanq[i].bazmanal()
         }
         else if (kyanq[i].energy <= 0) {
@@ -242,8 +246,6 @@ function game() {
         }
 
     }
-
-
 
 
 

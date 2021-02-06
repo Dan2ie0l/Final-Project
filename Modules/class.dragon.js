@@ -59,7 +59,7 @@ module.exports = class Dragon extends KendaniEak {
   }
 
   bazmanal() {
-    this.energy = 20;
+    this.energy = 10;
     var norVandak = random(this.yntrelVandak(0));
     if (norVandak ) {
       var dragon = new Dragon(norVandak[0], norVandak[1]);
